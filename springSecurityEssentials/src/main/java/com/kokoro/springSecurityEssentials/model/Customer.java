@@ -1,6 +1,7 @@
 package com.kokoro.springSecurityEssentials.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.kokoro.springSecurityEssentials.enums.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,9 @@ public class Customer {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
     private String email;
-    private String pwd;
-    private String role;
+    private String fullName;
+    private String password;
+    private Role role;
+    private Boolean isVerified = false;
 
 }
