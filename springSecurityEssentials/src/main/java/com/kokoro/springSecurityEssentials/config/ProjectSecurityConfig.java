@@ -1,9 +1,6 @@
 package com.kokoro.springSecurityEssentials.config;
 
-import com.kokoro.springSecurityEssentials.filter.AuthoritiesLoggingAfterFilter;
-import com.kokoro.springSecurityEssentials.filter.AuthoritiesLoggingAtFilter;
-import com.kokoro.springSecurityEssentials.filter.CsrfCookieFilter;
-import com.kokoro.springSecurityEssentials.filter.RequestValidationBeforeFilter;
+import com.kokoro.springSecurityEssentials.filter.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -61,6 +58,7 @@ public class ProjectSecurityConfig {
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
                 .addFilterAt(new AuthoritiesLoggingAtFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests)->requests
                         /*.requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
                         .requestMatchers("/myBalance").hasAnyAuthority("VIEWACCOUNT","VIEWBALANCE")
